@@ -65,20 +65,20 @@ namespace game_v2
 
         private void teclaArriba(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left && empezoJuego)
             {
                 movIzquierda = false;
             }
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right && empezoJuego)
             {
                 movDerecha = false;
             }
-            if (e.KeyCode == Keys.Space && disparo == false)
+            if (e.KeyCode == Keys.Space && !disparo && empezoJuego)
             {
                 disparo = true;
                 crearDisparo("jugadorDisparo");
             }
-            if (e.KeyCode == Keys.Enter && juegoPerdido == true)
+            if (e.KeyCode == Keys.Enter && juegoPerdido && empezoJuego)
             {
                 quitarTodo();
                 crearJuego();
@@ -87,6 +87,7 @@ namespace game_v2
 
         private void presionaEmpezar(object sender, EventArgs e)
         {
+            txtMensajes.Visible = false;
             empezoJuego = true;
             crearJuego();
         }
@@ -139,13 +140,6 @@ namespace game_v2
                 tiempoJuego.Start();
             }
 
-        }
-
-        private void perdioJuego(string message)
-        {
-            juegoPerdido = true;
-            tiempoJuego.Stop();
-            txtPuntaje.Text = $"Score: {puntajeContador} {message}";
         }
 
         private void quitarTodo()
@@ -301,8 +295,16 @@ namespace game_v2
         private void perdioElJuego(string message)
         {
             juegoPerdido = true;
+            empezoJuego = false;
+            txtPuntaje.Visible = false;
             tiempoJuego.Stop();
-            txtPuntaje.Text = $"Score: {puntajeContador} {message}";
+            pbJugador.Visible = false;
+            quitarTodo();
+            txtMensajes.Visible = true;
+            txtMensajes.Text = $"Puntaje: {puntajeContador} {message}";
+            txtMensajes.BringToFront(); // poner encima de todo
+            btnEmpezar.Visible = true;
+            tituloInicio.Visible = true;
         }
 
     }

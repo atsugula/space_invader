@@ -34,6 +34,7 @@
             pbJugador = new PictureBox();
             tituloInicio = new Label();
             btnEmpezar = new Label();
+            txtMensajes = new Label();
             ((System.ComponentModel.ISupportInitialize)pbJugador).BeginInit();
             SuspendLayout();
             // 
@@ -87,12 +88,24 @@
             btnEmpezar.Text = "Empezar";
             btnEmpezar.Click += presionaEmpezar;
             // 
+            // txtMensajes
+            // 
+            txtMensajes.AutoSize = true;
+            txtMensajes.Font = new Font("Comic Sans MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtMensajes.Location = new Point(12, 9);
+            txtMensajes.Name = "txtMensajes";
+            txtMensajes.Size = new Size(183, 27);
+            txtMensajes.TabIndex = 6;
+            txtMensajes.Text = "Mensaje de alerta";
+            txtMensajes.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(734, 561);
+            Controls.Add(txtMensajes);
             Controls.Add(btnEmpezar);
             Controls.Add(tituloInicio);
             Controls.Add(pbJugador);
@@ -113,5 +126,6 @@
         private PictureBox pbJugador;
         private Label tituloInicio;
         private Label btnEmpezar;
+        private Label txtMensajes;
     }
 }
