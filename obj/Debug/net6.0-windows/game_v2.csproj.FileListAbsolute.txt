@@ -1,0 +1,17 @@
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.Form1.resources
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.Properties.Resources.resources
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.csproj.GenerateResource.cache
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.AssemblyInfoInputs.cache
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.AssemblyInfo.cs
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.csproj.CoreCompileInputs.cache
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\bin\Debug\net6.0-windows\game_v2.exe
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\bin\Debug\net6.0-windows\game_v2.deps.json
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\bin\Debug\net6.0-windows\game_v2.runtimeconfig.json
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\bin\Debug\net6.0-windows\game_v2.dll
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\bin\Debug\net6.0-windows\game_v2.pdb
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.dll
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\refint\game_v2.dll
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.pdb
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\game_v2.genruntimeconfig.cache
+C:\Users\Jorge\source\repos\CRUD_pos\juego\game_v2\obj\Debug\net6.0-windows\ref\game_v2.dll
