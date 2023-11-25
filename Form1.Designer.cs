@@ -80,8 +80,10 @@
             // 
             btnEmpezar.AutoSize = true;
             btnEmpezar.BackColor = SystemColors.ActiveCaption;
+            btnEmpezar.Cursor = Cursors.Hand;
+            btnEmpezar.FlatStyle = FlatStyle.Popup;
             btnEmpezar.Font = new Font("Comic Sans MS", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEmpezar.Location = new Point(274, 302);
+            btnEmpezar.Location = new Point(275, 307);
             btnEmpezar.Name = "btnEmpezar";
             btnEmpezar.Size = new Size(174, 51);
             btnEmpezar.TabIndex = 5;
