@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Windows.Forms;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace game_v2
@@ -9,15 +10,15 @@ namespace game_v2
         // Movimiento del jugador
         bool movIzquierda, movDerecha;
         // Velocidad del jugador
-        int jugadorVelocidad = 12;
+        // int jugadorVelocidad = 12;
         // Velocidad de los enemigos
         int enemigosVelocidad = 5;
         // Puntaje del jugador
-        int puntajeContador = 0;
+        // int puntajeContador = 0;
         // cuando generar las balas enemigas
         int tiempoBalasEnemigas = 300;
         // cantidad enemigos
-        int cantidadEnemigos = 10;
+        int cantidadEnemigos = 15;
 
         // cuadro de imagenes de los invasores, es un array, para que sean varias
         PictureBox[] invasoresArray;
@@ -25,11 +26,6 @@ namespace game_v2
         bool disparo;
         bool juegoPerdido;
         bool empezoJuego;
-
-        public Form1()
-        {
-            InitializeComponent();
-        }
 
         // Nueva clase Jugador
         public class Jugador
@@ -49,6 +45,16 @@ namespace game_v2
                 Vidas = vidas;
             }
 
+        }
+
+        //variable de tipo de jugador
+        Jugador pooJugador;
+
+        public Form1()
+        {
+            InitializeComponent();
+            // Jugador
+            this.pooJugador = new Jugador("Jugador1", 0, 12, 3);
         }
 
         private void teclaPresionada(object sender, KeyEventArgs e)
@@ -129,7 +135,7 @@ namespace game_v2
                 tituloInicio.Visible = false;
 
                 txtPuntaje.Text = "Puntaje: 0";
-                puntajeContador = 0;
+                pooJugador.Puntos = 0;
                 juegoPerdido = false;
 
                 tiempoBalasEnemigas = 300;
@@ -192,16 +198,16 @@ namespace game_v2
         private void eventoPrincipalTiempoJuego(object sender, EventArgs e)
         {
 
-            txtPuntaje.Text = $"Puntaje: {puntajeContador}";
+            txtPuntaje.Text = $"Puntaje: {pooJugador.Puntos}";
 
             if (movIzquierda && empezoJuego)
             {
-                pbJugador.Left -= jugadorVelocidad;
+                pbJugador.Left -= pooJugador.Velocidad;
             }
 
             if (movDerecha && empezoJuego)
             {
-                pbJugador.Left += jugadorVelocidad;
+                pbJugador.Left += pooJugador.Velocidad;
             }
 
             tiempoBalasEnemigas -= 10;
@@ -227,7 +233,7 @@ namespace game_v2
 
                     if (x.Bounds.IntersectsWith(pbJugador.Bounds))
                     {
-                        perdioElJuego("Has sido invadido por los invasores, ¡ahora estás triste!");
+                        perdioElJuego($"{pooJugador.Nombre}, has sido invadido por los invasores, ¡ahora estás triste!", false);
                     }
 
                     foreach (Control y in this.Controls)
@@ -239,7 +245,7 @@ namespace game_v2
                             {
                                 this.Controls.Remove(x);
                                 this.Controls.Remove(y);
-                                puntajeContador += 1;
+                                pooJugador.Puntos += 1;
                                 disparo = false;
                             }
                         }
@@ -273,7 +279,7 @@ namespace game_v2
                     if (x.Bounds.IntersectsWith(pbJugador.Bounds))
                     {
                         this.Controls.Remove(x);
-                        perdioElJuego("Te han matado. Ahora estarás triste para siempre.");
+                        perdioElJuego($"Te han matado {pooJugador.Nombre}. Ahora estarás triste para siempre.", false);
                     }
 
                 }
@@ -281,30 +287,65 @@ namespace game_v2
             }
 
             // Validamos si vamos a ganar
-            if (puntajeContador > 8)
+            if (pooJugador.Puntos > 8)
             {
                 enemigosVelocidad = 12;
             }
 
-            if (puntajeContador == invasoresArray.Length)
+            if (pooJugador.Puntos == invasoresArray.Length)
             {
-                perdioElJuego("Woohoo Felicidades, ¡Mantenlo a salvo!");
+                perdioElJuego($"Woohoo Felicidades {pooJugador.Nombre}, ¡Mantenlo a salvo!", true);
             }
         }
 
-        private void perdioElJuego(string message)
+        private void perdioElJuego(string message, bool limpio)
         {
-            juegoPerdido = true;
-            empezoJuego = false;
+
+            pooJugador.Vidas -= 1; // Quitarle una vida al jugador
+            // Si el mk tiene vidas, y no a limpiado
+            if (empezoJuego && pooJugador.Vidas > 0 && !limpio)
+            {
+                txtPuntaje.Visible = false; // Ocultar puntaje
+                // Mostrar mensaje
+                txtMensajes.Visible = true;
+                txtMensajes.Text = $"Puntaje: {pooJugador.Puntos} \n {message}\nTe quedan {pooJugador.Vidas} vidas, presiona empezar para volver a intentarlo";
+                txtMensajes.BringToFront(); // poner encima de todo
+                // Volver a ver el inicio
+                btnEmpezar.Visible = true;
+                tituloInicio.Visible = true;
+                btnEmpezar.Text = "Continuar";
+                quitarTodo(); // Limpiamos todo el form
+                tiempoJuego.Stop(); // Parar el juego
+            }
+            // Aca, si ya limpio todo
+            else if (limpio)
+            {
+                reiniciarJuego($"{message}");
+            }
+
+            // Por aca, si ya se le acabaron
+            else if (empezoJuego && pooJugador.Vidas == 0)
+            {
+                reiniciarJuego($"{pooJugador.Nombre},\ntu vida a llegado a su fin.");
+            }
+
+        }
+
+        private void reiniciarJuego(string message)
+        {
+            pooJugador = new Jugador("Jugador1", 0, 12, 3); // Reiniciamos jugador
+            juegoPerdido = true; // Decimos que ya perdio
+            empezoJuego = false; // pa que comience de cero
             txtPuntaje.Visible = false;
             tiempoJuego.Stop();
-            pbJugador.Visible = false;
-            quitarTodo();
+            pbJugador.Visible = false; // No ver el jugador
+            quitarTodo(); // Limpiamos todo el form
             txtMensajes.Visible = true;
-            txtMensajes.Text = $"Puntaje: {puntajeContador} {message}";
+            txtMensajes.Text = $"Puntaje: {pooJugador.Puntos}\n{message}";
             txtMensajes.BringToFront(); // poner encima de todo
             btnEmpezar.Visible = true;
             tituloInicio.Visible = true;
+
         }
 
     }
