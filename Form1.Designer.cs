@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tiempoJuego = new System.Windows.Forms.Timer(components);
             txtPuntaje = new Label();
             pbJugador = new PictureBox();
@@ -93,10 +94,10 @@
             // txtMensajes
             // 
             txtMensajes.AutoSize = true;
-            txtMensajes.Font = new Font("Comic Sans MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtMensajes.Font = new Font("Comic Sans MS", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             txtMensajes.Location = new Point(12, 9);
             txtMensajes.Name = "txtMensajes";
-            txtMensajes.Size = new Size(183, 27);
+            txtMensajes.Size = new Size(123, 19);
             txtMensajes.TabIndex = 6;
             txtMensajes.Text = "Mensaje de alerta";
             txtMensajes.Visible = false;
@@ -112,6 +113,7 @@
             Controls.Add(tituloInicio);
             Controls.Add(pbJugador);
             Controls.Add(txtPuntaje);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Space Invader";
             KeyDown += teclaPresionada;
